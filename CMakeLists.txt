@@ -2,29 +2,55 @@ cmake_minimum_required(VERSION 3.10)
 
 project(notepadng)
 
+#
+# Qt version configuration
+#
+set(WITH_QT QT6 CACHE STRING "Qt version to use: either QT6 (default) or QT5")
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake/Modules")
 
-find_package(Qt6
-    COMPONENTS
-        Core
-        Gui
-        Svg
-        Widgets
-        PrintSupport
-        Network
-        DBus
-        Xml
-        Core5Compat
-        LinguistTools
-    REQUIRED
-)
+if(${WITH_QT} STREQUAL QT6)
+    message(STATUS "Building Qt6 variant")
 
-qt_standard_project_setup()
+    find_package(Qt6
+        COMPONENTS
+            Core
+            Gui
+            Svg
+            Widgets
+            PrintSupport
+            Network
+            DBus
+            Xml
+            Core5Compat
+            LinguistTools
+        REQUIRED
+    )
 
-find_package(QScintillaQt6 REQUIRED)
+    qt_standard_project_setup()
+
+    find_package(QScintillaQt6 REQUIRED)
+else()
+    message(STATUS "Building Qt5 variant")
+
+    find_package(Qt5
+        COMPONENTS
+            Core
+            Gui
+            Svg
+            Widgets
+            PrintSupport
+            Network
+            DBus
+            Xml
+            LinguistTools
+        REQUIRED
+    )
+
+    find_package(QScintillaQt5 REQUIRED)
+endif()
 
 find_package(PkgConfig REQUIRED)
-
 pkg_check_modules(uchardet REQUIRED IMPORTED_TARGET uchardet)
 
 set(notepadng_SRCS
@@ -133,12 +159,6 @@ add_executable(notepadng
     ${notepadng_QMS}
 )
 
-# Enable AUTORCC as qt_standard_project_setup() doesn't do it automatically
-set_target_properties(notepadng
-    PROPERTIES
-        AUTORCC ON
-)
-
 target_include_directories(notepadng
     PRIVATE
         src/include
@@ -146,16 +166,6 @@ target_include_directories(notepadng
 
 target_link_libraries(notepadng
     PRIVATE
-        Qt6::Core
-        Qt6::Gui
-        Qt6::Svg
-        Qt6::Widgets
-        Qt6::PrintSupport
-        Qt6::Network
-        Qt6::DBus
-        Qt6::Xml
-        Qt6::Core5Compat
-        QScintillaQt6::QScintillaQt6
         PkgConfig::uchardet
 )
 
@@ -163,11 +173,55 @@ set(QT_I18N_TRANSLATED_LANGUAGES
     de es fr hu it ja pl pt ru sl sv uk zh
 )
 
-qt_add_translations(notepadng
-    TS_OUTPUT_DIRECTORY translations
-    RESOURCE_PREFIX "/translations"
-    NO_GENERATE_PLURALS_TS_FILE
-)
+if(${WITH_QT} STREQUAL QT6)
+    # Enable AUTORCC as qt_standard_project_setup() doesn't do it automatically
+    set_target_properties(notepadng
+        PROPERTIES
+            AUTORCC ON
+    )
+
+    target_link_libraries(notepadng
+        PRIVATE
+            Qt6::Core
+            Qt6::Gui
+            Qt6::Svg
+            Qt6::Widgets
+            Qt6::PrintSupport
+            Qt6::Network
+            Qt6::DBus
+            Qt6::Xml
+            Qt6::Core5Compat
+            QScintillaQt6::QScintillaQt6
+    )
+
+    qt_add_translations(notepadng
+        TS_OUTPUT_DIRECTORY translations
+        RESOURCE_PREFIX "/translations"
+        NO_GENERATE_PLURALS_TS_FILE
+    )
+else()
+    set_target_properties(notepadng
+        PROPERTIES
+            AUTOMOC ON
+            AUTOUIC ON
+            AUTORCC ON
+    )
+
+    target_link_libraries(notepadng
+        PRIVATE
+            Qt5::Core
+            Qt5::Gui
+            Qt5::Svg
+            Qt5::Widgets
+            Qt5::PrintSupport
+            Qt5::Network
+            Qt5::DBus
+            Qt5::Xml
+            QScintillaQt5::QScintillaQt5
+    )
+
+    # FIXME: Support translations
+endif()
 
 set(GNU_COMPILE_OPTIONS
     -Werror=suggest-override
