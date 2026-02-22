@@ -1253,7 +1253,7 @@ void MainWindow::on_editorAdded(EditorTabWidget *tabWidget, int tab)
     editor->setSmartIndent(m_settings.General.getSmartIndentation());
 }
 
-void MainWindow::on_cursorActivity(QMap<QString, QVariant> data)
+void MainWindow::on_cursorActivity(Editor::CursorInfo cursorInfo)
 {
     Editor *editor = dynamic_cast<Editor *>(sender());
     if (!editor)
@@ -1261,18 +1261,15 @@ void MainWindow::on_cursorActivity(QMap<QString, QVariant> data)
 
     if (currentEditor() == editor)
     {
-        refreshEditorUiCursorInfo(data);
+        refreshEditorUiCursorInfo(cursorInfo);
     }
 }
 
-void MainWindow::refreshEditorUiCursorInfo(QMap<QString, QVariant> data)
+void MainWindow::refreshEditorUiCursorInfo(Editor::CursorInfo cursorInfo)
 {
-    auto curData = data["cursor"].toList();
-    auto selData = data["selections"].toList();
-    auto conData = data["content"].toList();
-    QString msg = tr("Ln %1, Col %2").arg(curData[0].toInt() + 1).arg(curData[1].toInt() + 1);
-    msg += tr("    Sel %1 (%2)").arg(selData[1].toInt()).arg(selData[0].toInt());
-    msg += tr("    %1 chars, %2 lines").arg(conData[1].toInt()).arg(conData[0].toInt());
+    QString msg = tr("Ln %1, Col %2").arg(cursorInfo.cursor.line + 1).arg(cursorInfo.cursor.column + 1);
+    msg += tr("    Sel %1 (%2)").arg(cursorInfo.selectedChars).arg(cursorInfo.selectedLines);
+    msg += tr("    %1 chars, %2 lines").arg(cursorInfo.totalChars).arg(cursorInfo.totalLines);
     m_sbDocumentInfoLabel->setText(msg);
 }
 

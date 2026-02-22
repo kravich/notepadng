@@ -91,6 +91,17 @@ public:
         int size;
     };
 
+    struct CursorInfo
+    {
+        Cursor cursor;
+
+        int selectedChars = 0;
+        int selectedLines = 0;
+
+        int totalChars = 0;
+        int totalLines = 0;
+    };
+
         /**
      * @brief Just a flag that is used for marking editors that are still loading,
      * meaning for example that the Editor has been created but we still need
@@ -349,8 +360,8 @@ signals:
 
         // Pre-interpreted messages:
     void contentChanged();
-    void cursorActivity(QMap<QString, QVariant> data);
-    void documentInfoRequested(QMap<QString, QVariant> data);
+    void cursorActivity(CursorInfo cursorInfo);
+    void documentInfoRequested(CursorInfo cursorInfo);
     void cleanChanged(bool isClean);
     void fileNameChanged(const QUrl &oldFileName, const QUrl &newFileName);
     void zoomChanged(int zoomFactor);

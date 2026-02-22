@@ -485,25 +485,18 @@ void Editor::requestDocumentInfo()
     int linesCount = m_scintilla->lines();
     int charsCount = m_scintilla->text().length();
 
-    QMap<QString, QVariant> data;
+    CursorInfo cursorInfo;
 
-    QList<int> cursorList;
-    cursorList.append(cursorLine);
-    cursorList.append(cursorIndex);
+    cursorInfo.cursor.line = cursorLine;
+    cursorInfo.cursor.column = cursorIndex;
 
-    QList<int> selectionsList;
-    selectionsList.append(selectedLines);
-    selectionsList.append(selectedChars);
+    cursorInfo.selectedLines = selectedLines;
+    cursorInfo.selectedChars = selectedChars;
 
-    QList<int> contentList;
-    contentList.append(linesCount);
-    contentList.append(charsCount);
+    cursorInfo.totalLines = linesCount;
+    cursorInfo.totalChars = charsCount;
 
-    data["cursor"] = QVariant::fromValue(cursorList);
-    data["selections"] = QVariant::fromValue(selectionsList);
-    data["content"] = QVariant::fromValue(contentList);
-
-    emit documentInfoRequested(data);
+    emit documentInfoRequested(cursorInfo);
 }
 
 QPair<int, int> Editor::cursorPosition()

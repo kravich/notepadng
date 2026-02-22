@@ -65,7 +65,7 @@ public:
     void generateRunMenu();
 public slots:
     void refreshEditorUiInfo(QSharedPointer<Editor> editor);
-    void refreshEditorUiCursorInfo(QMap<QString, QVariant> data);
+    void refreshEditorUiCursorInfo(Editor::CursorInfo cursorInfo);
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -93,7 +93,7 @@ private slots:
     void on_actionBegin_End_Select_triggered();
     void on_currentEditorChanged(EditorTabWidget *tabWidget, int tab);
     void on_editorAdded(EditorTabWidget *tabWidget, int tab);
-    void on_cursorActivity(QMap<QString, QVariant> data);
+    void on_cursorActivity(Editor::CursorInfo cursorInfo);
     void on_actionDelete_triggered();
     void on_actionSelect_All_triggered();
     void on_actionAbout_Notepadng_triggered();
