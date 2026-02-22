@@ -33,13 +33,19 @@ int main(int argc, char *argv[])
     fprintf(stderr, "WARNING: Notepadng is running in DEBUG mode.\n");
 #endif
 
+#if (QT_VERSION_CHECK(5, 6, 0) <= QT_VERSION) && (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
+    SingleApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    SingleApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
     SingleApplication a(argc, argv);
 
     QCoreApplication::setOrganizationName("Notepadng");
     QCoreApplication::setApplicationName("Notepadng");
     QCoreApplication::setApplicationVersion(Notepadng::version);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QGuiApplication::setDesktopFileName("notepadng");
+#endif
 
     QSettings::setDefaultFormat(QSettings::IniFormat);
 
