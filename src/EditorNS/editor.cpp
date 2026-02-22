@@ -16,6 +16,8 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
+#include <cmath>
+
 namespace EditorNS
 {
 
