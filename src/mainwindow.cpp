@@ -20,6 +20,7 @@
 
 #include <QActionGroup>
 #include <QClipboard>
+#include <QDebug>
 #include <QDesktopServices>
 #include <QFileDialog>
 #include <QInputDialog>
