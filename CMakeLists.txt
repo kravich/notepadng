@@ -21,7 +21,7 @@ find_package(Qt6
 
 qt_standard_project_setup()
 
-find_package(QScintilla REQUIRED)
+find_package(QScintillaQt6 REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 
@@ -155,7 +155,7 @@ target_link_libraries(notepadng
         Qt6::DBus
         Qt6::Xml
         Qt6::Core5Compat
-        QScintilla::QScintilla
+        QScintillaQt6::QScintillaQt6
         PkgConfig::uchardet
 )
 
