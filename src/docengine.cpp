@@ -10,6 +10,7 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QString>
 #include <QTextCodec>
 #include <QTextStream>
 
