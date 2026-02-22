@@ -62,13 +62,15 @@ int ScintillaTheme::LoadFromFile(const QString &themePath)
 
         for (; !wordStyleElement.isNull(); wordStyleElement = wordStyleElement.nextSiblingElement())
         {
-            Style &style = styles.emplaceBack();
+            Style style;
 
             style.name = wordStyleElement.attribute("name");
             style.styleId = wordStyleElement.attribute("styleID").toInt();
             style.fgColor = wordStyleElement.attribute("fgColor").toUInt(nullptr, 16);
             style.bgColor = wordStyleElement.attribute("bgColor").toUInt(nullptr, 16);
             style.fontStyle = wordStyleElement.attribute("fontStyle").toInt();
+
+            styles.append(style);
         }
 
         // FIXME: validate
