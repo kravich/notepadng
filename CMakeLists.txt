@@ -48,6 +48,8 @@ else()
     )
 
     find_package(QScintillaQt5 REQUIRED)
+
+    include(Qt5Polyfill)
 endif()
 
 find_package(PkgConfig REQUIRED)
@@ -173,6 +175,12 @@ set(QT_I18N_TRANSLATED_LANGUAGES
     de es fr hu it ja pl pt ru sl sv uk zh
 )
 
+qt_add_translations(notepadng
+    TS_OUTPUT_DIRECTORY translations
+    RESOURCE_PREFIX "/translations"
+    NO_GENERATE_PLURALS_TS_FILE
+)
+
 if(${WITH_QT} STREQUAL QT6)
     # Enable AUTORCC as qt_standard_project_setup() doesn't do it automatically
     set_target_properties(notepadng
@@ -192,12 +200,6 @@ if(${WITH_QT} STREQUAL QT6)
             Qt6::Xml
             Qt6::Core5Compat
             QScintillaQt6::QScintillaQt6
-    )
-
-    qt_add_translations(notepadng
-        TS_OUTPUT_DIRECTORY translations
-        RESOURCE_PREFIX "/translations"
-        NO_GENERATE_PLURALS_TS_FILE
     )
 else()
     set_target_properties(notepadng
@@ -219,8 +221,6 @@ else()
             Qt5::Xml
             QScintillaQt5::QScintillaQt5
     )
-
-    # FIXME: Support translations
 endif()
 
 set(GNU_COMPILE_OPTIONS
