@@ -3,6 +3,7 @@
 #include "include/iconprovider.h"
 
 #include <QApplication>
+#include <QDebug>
 #include <QFileInfo>
 #include <QTabBar>
 

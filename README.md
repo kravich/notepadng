@@ -13,36 +13,39 @@ On Debian/Ubuntu this could be achieved by:
 
 ## Manual build
 
-| Dependency            | Debian/Ubuntu package  |
-|-----------------------|------------------------|
-| CMake                 | cmake                  |
-| pkg-config            | pkgconf                |
-| Qt6 Core              | qt6-base-dev           |
-| Qt6 Gui               |                        |
-| Qt6 Widgets           |                        |
-| Qt6 PrintSupport      |                        |
-| Qt6 DBus              |                        |
-| Qt6 Network           |                        |
-| Qt6 Xml               |                        |
-| Qt6 Svg               | qt6-svg-dev            |
-| Qt6 Core5Compat       | qt6-5compat-dev        |
-| Qt6 LinguistTools     | qt6-l10n-tools         |
-| QScintilla            | libqscintilla2-qt6-dev |
-| uchardet              | libuchardet-dev        |
+Notepadng could be built in Qt6 and Qt5 variants. Please find below a list of required dependencies.
+
+| Dependency       | Deb package (Qt6 build) | Deb package (Qt5 build) |
+|------------------|-------------------------|-------------------------|
+| CMake            | cmake                   | cmake                   |
+| pkg-config       | pkgconf                 | pkgconf                 |
+| Qt Core          | qt6-base-dev            | qtbase5-dev             |
+| Qt Gui           |                         |                         |
+| Qt Widgets       |                         |                         |
+| Qt PrintSupport  |                         |                         |
+| Qt DBus          |                         |                         |
+| Qt Network       |                         |                         |
+| Qt Xml           |                         |                         |
+| Qt Svg           | qt6-svg-dev             | libqt5svg5-dev          |
+| Qt LinguistTools | qt6-tools-dev           | qttools5-dev            |
+| Qt6 Core5Compat  | qt6-5compat-dev         | N/A                     |
+| QScintilla       | libqscintilla2-qt6-dev  | libqscintilla2-qt5-dev  |
+| uchardet         | libuchardet-dev         | libuchardet-dev         |
 
 ### Get the source
 
     $ git clone https://github.com/kravich/notepadng.git
     $ cd notepadng
 
-### Build
+### Build (Qt6)
 
     notepadng$ cmake -DCMAKE_INSTALL_PREFIX=/usr .
     notepadng$ make
 
-If you encounter errors make sure to have the necessary libraries installed. For Ubuntu you can do that using apt:
+### Build (Qt5)
 
-    sudo apt install cmake qt6-base-dev qt6-svg-dev qt6-5compat-dev qt6-l10n-tools libqscintilla2-qt6-dev libuchardet-dev
+    notepadng$ cmake -DWITH_QT=QT5 -DCMAKE_INSTALL_PREFIX=/usr .
+    notepadng$ make
 
 ### Install
 

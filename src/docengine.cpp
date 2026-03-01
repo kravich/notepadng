@@ -10,6 +10,7 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QString>
 #include <QTextCodec>
 #include <QTextStream>
 
@@ -781,7 +782,11 @@ QByteArray DocEngine::getBomForUtf8()
     int aSize; // Size of the "a" character
 
     QTextStream stream(&bom);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     stream.setEncoding(QStringConverter::Utf8);
+#else
+    stream.setCodec("UTF-8");
+#endif
     stream.setGenerateByteOrderMark(true);
 
     // Write an 'a' so that the BOM gets written.

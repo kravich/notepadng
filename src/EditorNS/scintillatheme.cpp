@@ -21,12 +21,27 @@ int ScintillaTheme::LoadFromFile(const QString &themePath)
 
     QDomDocument themeDoc;
 
+    QString parseErrorMessage;
+    int parseErrorLine = 0;
+    int parseErrorColumn = 0;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     QDomDocument::ParseResult parseResult = themeDoc.setContent(&themeFile);
+    if (!parseResult)
+    {
+        parseErrorMessage = parseResult.errorMessage;
+        parseErrorLine = parseResult.errorLine;
+        parseErrorColumn = parseResult.errorColumn;
+    }
+#else
+    bool parseResult = themeDoc.setContent(&themeFile, &parseErrorMessage, &parseErrorLine, &parseErrorColumn);
+#endif
+
     themeFile.close();
 
     if (!parseResult)
     {
-        fprintf(stderr, "Failed to parse %s(%lld:%lld): %s\n", themePath.toUtf8().data(), parseResult.errorLine, parseResult.errorColumn, parseResult.errorMessage.toUtf8().data());
+        fprintf(stderr, "Failed to parse %s(%d:%d): %s\n", themePath.toUtf8().data(), parseErrorLine, parseErrorColumn, parseErrorMessage.toUtf8().data());
         return -1;
     }
 
@@ -62,13 +77,15 @@ int ScintillaTheme::LoadFromFile(const QString &themePath)
 
         for (; !wordStyleElement.isNull(); wordStyleElement = wordStyleElement.nextSiblingElement())
         {
-            Style &style = styles.emplaceBack();
+            Style style;
 
             style.name = wordStyleElement.attribute("name");
             style.styleId = wordStyleElement.attribute("styleID").toInt();
             style.fgColor = wordStyleElement.attribute("fgColor").toUInt(nullptr, 16);
             style.bgColor = wordStyleElement.attribute("bgColor").toUInt(nullptr, 16);
             style.fontStyle = wordStyleElement.attribute("fontStyle").toInt();
+
+            styles.append(style);
         }
 
         // FIXME: validate

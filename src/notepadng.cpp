@@ -3,6 +3,7 @@
 #include "include/nngsettings.h"
 
 #include <QCheckBox>
+#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QMessageBox>
