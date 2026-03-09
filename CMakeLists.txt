@@ -253,7 +253,7 @@ install(DIRECTORY ${notepadng_DIST_PATH}/themes
     DESTINATION share/notepadng
 )
 
-install(FILES ${notepadng_DIST_PATH}/shortcuts/notepadng.desktop
+install(FILES ${notepadng_DIST_PATH}/shortcuts/org.notepadng.Notepadng.desktop
     DESTINATION share/applications
 )
 
@@ -265,7 +265,7 @@ install(FILES ${notepadng_DIST_PATH}/manpage/notepadng.1
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man1
 )
 
-install(FILES ${notepadng_DIST_PATH}/notepadng.appdata.xml
+install(FILES ${notepadng_DIST_PATH}/org.notepadng.Notepadng.appdata.xml
     DESTINATION share/metainfo
 )
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Evgeny Kravchenko -->
+<component type="desktop-application">
+  <id>org.notepadng.Notepadng</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <name>Notepadng</name>
+  <summary>Notepad++-like editor</summary>
+  <description>
+    <p>Notepadng is a Notepad++-like editor for programmers and power users.</p>
+  </description>
+  <launchable type="desktop-id">org.notepadng.Notepadng.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Editor main window</caption>
+      <image>https://notepadng.org/screenshots/screenshot-1.png</image>
+    </screenshot>
+  </screenshots>
+  <!-- FIXME: Select branding colors -->
+  <branding>
+    <color type="primary" scheme_preference="light">#ffffff</color>
+    <color type="primary" scheme_preference="dark">#000000</color>
+  </branding>
+  <requires>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <display_length compare="ge">768</display_length>
+  </requires>
+  <developer id="info.kravich">
+    <name>Evgeny Kravchenko</name>
+  </developer>
+  <update_contact>kravich64_AT_gmail.com</update_contact>
+  <url type="homepage">https://notepadng.org</url>
+  <url type="bugtracker">https://github.com/kravich/notepadng/issues</url>
+  <url type="help">https://github.com/kravich/notepadng/wiki</url>
+  <url type="vcs-browser">https://github.com/kravich/notepadng</url>
+  <content_rating type="oars-1.1" />
+  <provides>
+    <binary>notepadng</binary>
+  </provides>
+  <releases>
+    <release version="0.0.99" date="2026-01-10" type="development">
+      <description>
+        <p>Initial release</p>
+      </description>
+    </release>
+  </releases>
+</component>
