@@ -11,7 +11,7 @@
 
 const QString Notepadng::version = POINTVERSION;
 const QString Notepadng::contributorsUrl = "https://github.com/kravich/notepadng/graphs/contributors";
-const QString Notepadng::website = "https://notepadng.github.io";
+const QString Notepadng::website = "https://notepadng.org";
 
 QString Notepadng::copyright()
 {
