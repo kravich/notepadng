@@ -253,7 +253,7 @@ install(DIRECTORY ${notepadng_DIST_PATH}/themes
     DESTINATION share/notepadng
 )
 
-install(FILES ${notepadng_DIST_PATH}/shortcuts/notepadng.desktop
+install(FILES ${notepadng_DIST_PATH}/shortcuts/org.notepadng.Notepadng.desktop
     DESTINATION share/applications
 )
 
