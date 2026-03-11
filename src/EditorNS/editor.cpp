@@ -961,6 +961,15 @@ void Editor::refreshAppearance()
 
     m_scintilla->setExtraDescent(descentPx);
 
+    if (getLanguage()->id == "plaintext")
+    {
+        m_scintilla->setBraceMatching(CustomScintilla::NoBraceMatch);
+    }
+    else
+    {
+        m_scintilla->setBraceMatching(CustomScintilla::SloppyBraceMatch);
+    }
+
     // Initialize everything initially with default style
     // If we have custom global styles for individual elements or lexer styles for current language,
     // we will re-style everything at the next stages

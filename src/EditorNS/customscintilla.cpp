@@ -16,9 +16,6 @@ CustomScintilla::CustomScintilla(QWidget *parent) :
     QFont font("Monospace");
     font.setStyleHint(QFont::TypeWriter);
     setFont(font);
-
-    // Always do brace matching
-    setBraceMatching(SloppyBraceMatch);
 }
 
 /* Information */
