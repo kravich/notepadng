@@ -1,120 +1,59 @@
 name: notepadng
-version: '0.0.99'
-summary: A Notepadng++-like editor
-description: |
-  Notepadng is a Notepad++-like editor for programmers and power users.
-grade: stable
-confinement: classic
-icon: dist/icons/hicolor/scalable/apps/notepadng.svg
-base: core18
+adopt-info: notepadng
+
+grade: devel
+confinement: strict
+icon: dist/icons/hicolor/scalable/apps/org.notepadng.Notepadng.svg
+base: core24
 
 apps:
   notepadng:
-    command: bin/desktop-launch $SNAP/usr/local/lib/notepadng/notepadng-bin
-    desktop: usr/local/share/applications/notepadng.desktop
-#   plugs:  # Plugs are not needed for classic confinement
-#     - browser-support
-#     - desktop
-#     - desktop-legacy
-#     - gsettings
-#     - home
-#     - media-hub
-#     - network-bind
-#     - network-manager
-#     - opengl
-#     - optical-drive
-#     - removable-media
-#     - unity7
-#     - x11
+    common-id: org.notepadng.Notepadng
+    command: usr/bin/notepadng
+    desktop: usr/share/applications/org.notepadng.Notepadng.desktop
+    extensions:
+      - kde-neon-6
+    plugs:
+      - home
 
 parts:
-  desktop-qt5:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-depth: 1
-    source-subdir: qt
-    plugin: make
-    make-parameters: ["FLAVOR=qt5"]
-    build-packages:
-      - build-essential
-      - qtbase5-dev
-      - dpkg-dev
-    stage-packages:
-      - libxkbcommon0
-      - ttf-ubuntu-font-family
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-standard
-      - shared-mime-info
-      - libqt5gui5
-      - libgdk-pixbuf2.0-0
-      - libqt5svg5 # for loading icon themes which are svg
-      - try: [appmenu-qt5] # not available on core18
-      - locales-all
-      - xdg-user-dirs
-      - fcitx-frontend-qt5
-
-  fixicon:
+  qscintilla:
     plugin: nil
-    after: [my-part]
-    override-build: |
-      sed -i 's|Icon=notepadng|Icon=/usr/local/share/icons/hicolor/scalable/apps/notepadng\.svg|' $SNAPCRAFT_STAGE/usr/local/share/applications/notepadng.desktop
-
-  qtconf:
-    plugin: dump
-    source: snap/local
-    organize:
-      qt.conf: usr/local/lib/notepadng/qt.conf
-      qt.WebEngineProcess.conf: usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/libexec/qt.conf
-    override-build: |
-      sed -i "s|__ARCH_TRIPLET__|$SNAPCRAFT_ARCH_TRIPLET|" qt.conf qt.WebEngineProcess.conf
-      snapcraftctl build
-    after: [my-part]
-
-  my-part:
-    build-packages:
-      - pkg-config
-      - qtbase5-dev
-      - qtwebengine5-dev
-      - libqt5websockets5-dev
-      - libqt5svg5-dev
-      - qttools5-dev-tools
-      - libuchardet-dev
     stage-packages:
-      - adwaita-icon-theme-full
-      - bamfdaemon
-      - coreutils
-      - desktop-file-utils
-      - gnome-menus
-      - gtk2-engines-pixbuf
-      - hicolor-icon-theme
-      - libatk-adaptor
-      - libcanberra-gtk-module
-      - libgail-common
-      - libqt5svg5
-      - light-themes
-      - man-db
-      - mime-support
-      - numix-gtk-theme
-      - overlay-scrollbar-gtk2
-      - packagekit-gtk3-module
-      - qtbase5-dev
-      - unity-gtk-module-common
-      - unity-schemas
-      - libnss3
-      - libcanberra-gtk3-module
-      - libqt5webengine5
-      - libqt5quickwidgets5
-      - libqt5webenginewidgets5
+      - libqscintilla2-qt6-15
+    prime:
+      - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libqscintilla2_qt6.so.*
+      - usr/share/qt6/translations/qscintilla_*.qm
+
+  uchardet:
+    after:
+      - qscintilla
+    plugin: nil
+    stage-packages:
       - libuchardet0
-      - qtwayland5
+    prime:
+      - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libuchardet.so.*
 
+  notepadng:
+    after:
+      - uchardet
+    parse-info:
+      - dist/org.notepadng.Notepadng.appdata.xml
+    build-packages:
+      - pkgconf
+      - libqscintilla2-qt6-dev
+      - libuchardet-dev
     source: .
-    after: [desktop-qt5]
-    plugin: qmake
-    options:
-      - DEFINES+=BUILD_SNAP
-
-    override-build: |
-      sed -i '/.*QMAKE_RPATH=$/d' src/ui/ui.pro  # Hack for forcing the use of RPATH
-      snapcraftctl build
+    plugin: cmake
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_CXX_FLAGS='-DBUILD_SNAP'
+    cmake-generator: Ninja
+    prime:
+      - usr/bin/notepadng
+      - usr/share/applications/org.notepadng.Notepadng.desktop
+      - usr/share/icons/hicolor/*/apps/org.notepadng.Notepadng.png
+      - usr/share/icons/hicolor/scalable/apps/org.notepadng.Notepadng.svg
+      - usr/share/metainfo/org.notepadng.Notepadng.appdata.xml
+      - usr/share/notepadng
