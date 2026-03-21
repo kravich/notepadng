@@ -269,6 +269,8 @@ install(FILES ${notepadng_DIST_PATH}/org.notepadng.Notepadng.appdata.xml
     DESTINATION share/metainfo
 )
 
+include(CPack)
+
 include(CTest)
 
 if(BUILD_TESTING)
