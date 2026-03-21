@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(notepadng)
+project(notepadng VERSION 0.0.99)
 
 #
 # Qt version configuration
@@ -268,6 +268,12 @@ install(FILES ${notepadng_DIST_PATH}/manpage/notepadng.1
 install(FILES ${notepadng_DIST_PATH}/org.notepadng.Notepadng.appdata.xml
     DESTINATION share/metainfo
 )
+
+list(APPEND CPACK_GENERATOR DEB TGZ)
+list(APPEND CPACK_SOURCE_GENERATOR TGZ)
+
+configure_file(CPackOptions.cmake.in CPackOptions.cmake @ONLY)
+set(CPACK_PROJECT_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/CPackOptions.cmake")
 
 include(CPack)
 

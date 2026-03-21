@@ -1,0 +1,8 @@
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Notepad++-like editor")
+set(CPACK_PACKAGE_DESCRIPTION "Notepadng is a Notepad++-like editor for programmers and power users.")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://notepadng.org")
+set(CPACK_PACKAGE_CONTACT "Evgeny Kravchenko <kravich64@gmail.com>")
+
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
+
+set(CPACK_PACKAGE_CHECKSUM SHA1)
