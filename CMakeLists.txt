@@ -262,7 +262,7 @@ install(DIRECTORY ${notepadng_DIST_PATH}/icons
 )
 
 install(FILES ${notepadng_DIST_PATH}/manpage/notepadng.1
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man1
+    DESTINATION share/man/man1
 )
 
 install(FILES ${notepadng_DIST_PATH}/org.notepadng.Notepadng.appdata.xml
