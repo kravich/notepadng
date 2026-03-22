@@ -272,6 +272,9 @@ install(FILES ${notepadng_DIST_PATH}/org.notepadng.Notepadng.appdata.xml
 list(APPEND CPACK_GENERATOR DEB TGZ)
 list(APPEND CPACK_SOURCE_GENERATOR TGZ)
 
+# Propagate Qt version to CPack
+set(CPACK_WITH_QT ${WITH_QT})
+
 configure_file(CPackOptions.cmake.in CPackOptions.cmake @ONLY)
 set(CPACK_PROJECT_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/CPackOptions.cmake")
 
