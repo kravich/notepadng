@@ -2,7 +2,6 @@
 
 #include "EditorNS/nulllexer.h"
 
-#include <Qsci/qscilexerasm.h>
 #include <Qsci/qscilexeravs.h>
 #include <Qsci/qscilexerbash.h>
 #include <Qsci/qscilexerbatch.h>
@@ -16,19 +15,15 @@
 #include <Qsci/qscilexeredifact.h>
 #include <Qsci/qscilexerfortran.h>
 #include <Qsci/qscilexerfortran77.h>
-#include <Qsci/qscilexerhex.h>
 #include <Qsci/qscilexerhtml.h>
 #include <Qsci/qscilexeridl.h>
-#include <Qsci/qscilexerintelhex.h>
 #include <Qsci/qscilexerjava.h>
 #include <Qsci/qscilexerjavascript.h>
 #include <Qsci/qscilexerjson.h>
 #include <Qsci/qscilexerlua.h>
 #include <Qsci/qscilexermakefile.h>
 #include <Qsci/qscilexermarkdown.h>
-#include <Qsci/qscilexermasm.h>
 #include <Qsci/qscilexermatlab.h>
-#include <Qsci/qscilexernasm.h>
 #include <Qsci/qscilexeroctave.h>
 #include <Qsci/qscilexerpascal.h>
 #include <Qsci/qscilexerperl.h>
@@ -40,14 +35,22 @@
 #include <Qsci/qscilexerruby.h>
 #include <Qsci/qscilexerspice.h>
 #include <Qsci/qscilexersql.h>
-#include <Qsci/qscilexersrec.h>
 #include <Qsci/qscilexertcl.h>
-#include <Qsci/qscilexertekhex.h>
 #include <Qsci/qscilexertex.h>
 #include <Qsci/qscilexerverilog.h>
 #include <Qsci/qscilexervhdl.h>
 #include <Qsci/qscilexerxml.h>
 #include <Qsci/qscilexeryaml.h>
+
+#if QSCINTILLA_VERSION >= QT_VERSION_CHECK(2, 14, 0)
+#include <Qsci/qscilexerasm.h>
+#include <Qsci/qscilexermasm.h>
+#include <Qsci/qscilexernasm.h>
+#include <Qsci/qscilexerhex.h>
+#include <Qsci/qscilexerintelhex.h>
+#include <Qsci/qscilexertekhex.h>
+#include <Qsci/qscilexersrec.h>
+#endif
 
 namespace EditorNS
 {
@@ -73,7 +76,6 @@ QsciLexer* CreateLexerForId(QObject *parent, const QString &id)
                         (id == "fortran77")   ? new QsciLexerFortran77(parent) :    // FIXME: Add to Languages.json
                         (id == "html")        ? new QsciLexerHTML(parent) :
                         (id == "idl")         ? new QsciLexerIDL(parent) :
-                        (id == "intelhex")    ? new QsciLexerIntelHex(parent) :     // FIXME: Add to Languages.json
                         (id == "java")        ? new QsciLexerJava(parent) :
                         (id == "javascript")   ? new QsciLexerJavaScript(parent) :
                         (id == "json")        ? new QsciLexerJSON(parent) :
@@ -81,9 +83,7 @@ QsciLexer* CreateLexerForId(QObject *parent, const QString &id)
                         (id == "lua")         ? new QsciLexerLua(parent) :
                         (id == "makefile")    ? new QsciLexerMakefile(parent) :
                         (id == "markdown")    ? new QsciLexerMarkdown(parent) :
-                        (id == "masm")        ? new QsciLexerMASM(parent) :         // FIXME: Add to Languages.json
                         (id == "matlab")      ? new QsciLexerMatlab(parent) :       // FIXME: Add to Languages.json
-                        (id == "nasm")        ? new QsciLexerNASM(parent) :         // FIXME: Add to Languages.json
                         (id == "octave")      ? new QsciLexerOctave(parent) :
                         (id == "pascal")      ? new QsciLexerPascal(parent) :
                         (id == "perl")        ? new QsciLexerPerl(parent) :
@@ -95,14 +95,20 @@ QsciLexer* CreateLexerForId(QObject *parent, const QString &id)
                         (id == "ruby")        ? new QsciLexerRuby(parent) :
                         (id == "spice")       ? new QsciLexerSpice(parent) :        // FIXME: Add to Languages.json
                         (id == "sql")         ? new QsciLexerSQL(parent) :
-                        (id == "srec")        ? new QsciLexerSRec(parent) :         // FIXME: Add to Languages.json
+
                         (id == "tcl")         ? new QsciLexerTCL(parent) :
-                        (id == "tekhex")      ? new QsciLexerTekHex(parent) :       // FIXME: Add to Languages.json
                         (id == "typescipt")   ? new QsciLexerJavaScript(parent) :   // use JavaScript lexer for TypeScript
                         (id == "verilog")     ? new QsciLexerVerilog(parent) :
                         (id == "vhdl")        ? new QsciLexerVHDL(parent) :
                         (id == "xml")         ? new QsciLexerXML(parent) :
                         (id == "yaml")        ? new QsciLexerYAML(parent) :
+#if QSCINTILLA_VERSION >= QT_VERSION_CHECK(2, 14, 0)
+                        (id == "masm")        ? new QsciLexerMASM(parent) :         // FIXME: Add to Languages.json
+                        (id == "nasm")        ? new QsciLexerNASM(parent) :         // FIXME: Add to Languages.json
+                        (id == "intelhex")    ? new QsciLexerIntelHex(parent) :     // FIXME: Add to Languages.json
+                        (id == "tekhex")      ? new QsciLexerTekHex(parent) :       // FIXME: Add to Languages.json
+                        (id == "srec")        ? new QsciLexerSRec(parent) :         // FIXME: Add to Languages.json
+#endif
                                                 (QsciLexer*)new NullLexer(parent);
 
     return lexer;
