@@ -82,7 +82,7 @@ function(qt_add_translations)
         add_dependencies(${target} release_translations)
 
         qt_create_resource_file(${CMAKE_BINARY_DIR}/${target}_translations.qrc PREFIX ${arg_RESOURCE_PREFIX} FILES ${qmFiles})
-        qt_add_resources(translation_SRCS ${CMAKE_BINARY_DIR}/${target}_translations.qrc)
+        qt5_add_resources(translation_SRCS ${CMAKE_BINARY_DIR}/${target}_translations.qrc)
         target_sources(${target} PRIVATE ${translation_SRCS})
     endforeach()
 endfunction()
