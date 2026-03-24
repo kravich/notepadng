@@ -25,6 +25,8 @@
 
 #include "mainwindow.h"
 
+#include "config.h"
+
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QFile>
@@ -34,7 +36,7 @@
 #include <QString>
 #include <QUrl>
 
-#define POINTVERSION "0.0.99" // major.minor.revision
+#define POINTVERSION CMAKE_PROJECT_VERSION // major.minor.revision
 
 #define COPYRIGHT_YEAR "2026"
 

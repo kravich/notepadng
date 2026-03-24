@@ -138,6 +138,7 @@ set(notepadng_HEADERS
     src/include/Sessions/backupservice.h
     src/include/svgiconengine.h
     src/include/Qt5Polyfill.h
+    src/config.h.in
 )
 
 set(notepadng_FORMS
@@ -165,12 +166,15 @@ add_executable(notepadng
 target_include_directories(notepadng
     PRIVATE
         src/include
+        ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 target_link_libraries(notepadng
     PRIVATE
         PkgConfig::uchardet
 )
+
+configure_file(src/config.h.in config.h @ONLY)
 
 set(QT_I18N_TRANSLATED_LANGUAGES
     de es fr hu it ja pl pt ru sl sv uk zh
