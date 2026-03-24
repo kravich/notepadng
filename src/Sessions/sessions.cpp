@@ -130,7 +130,7 @@ std::vector<ViewData> SessionReader::readData(bool *outSuccess)
 
     if (m_reader.readNextStartElement())
     {
-        if (m_reader.name() == "Notepadng")
+        if (m_reader.name() == QString("Notepadng"))
         {
             result = readViewData();
         }
@@ -155,7 +155,7 @@ std::vector<ViewData> SessionReader::readViewData()
 
     while (m_reader.readNextStartElement())
     {
-        if (m_reader.name() == "View")
+        if (m_reader.name() == QString("View"))
         {
             ViewData vd;
             vd.tabs = readTabData();
@@ -174,7 +174,7 @@ std::vector<TabData> SessionReader::readTabData()
 
     while (m_reader.readNextStartElement())
     {
-        if (m_reader.name() == "Tab")
+        if (m_reader.name() == QString("Tab"))
         {
             const QXmlStreamAttributes &attrs = m_reader.attributes();
 

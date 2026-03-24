@@ -1,0 +1,44 @@
+set(PACKAGE_NAME_QT6 "notepadng-qt6")
+set(PACKAGE_NAME_QT5 "notepadng-qt5")
+
+if(CPACK_WITH_QT STREQUAL QT6)
+set(CPACK_PACKAGE_NAME ${PACKAGE_NAME_QT6})
+else()
+set(CPACK_PACKAGE_NAME ${PACKAGE_NAME_QT5})
+endif()
+
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Notepad++-like editor")
+set(CPACK_PACKAGE_DESCRIPTION "Notepadng is a Notepad++-like editor for programmers and power users.")
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://notepadng.org")
+set(CPACK_PACKAGE_CONTACT "Evgeny Kravchenko <kravich64@gmail.com>")
+
+if(NOT CPACK_SOURCE_PACKAGE_FILE_NAME)
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
+endif()
+
+set(CPACK_PACKAGE_CHECKSUM SHA1)
+
+#
+# deb generator
+#
+if(CPACK_GENERATOR STREQUAL DEB)
+
+set(CPACK_DEBIAN_PACKAGE_RELEASE 1)
+set(CPACK_DEBIAN_PACKAGE_SECTION "editors")
+set(CPACK_DEBIAN_PACKAGE_PROVIDES "notepadng")
+set(CPACK_DEBIAN_PACKAGE_SUGGESTS "ttf-mscorefonts-installer")    # For Courier New and other common fonts
+
+set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+
+if(CPACK_WITH_QT STREQUAL QT6)
+# set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON) # Disabled to workaround t64 vs non-t64 packages situation between baseline Noble and later releases
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.34), libgcc-s1 (>= 3.0), libqscintilla2-qt6-15 (>= 2.14.1), libqt6core5compat6 (>= 6.2.1), libqt6core6 (>= 6.4.0), libqt6gui6 (>= 6.4.0), libqt6network6 (>= 6.1.2), libqt6printsupport6 (>= 6.1.2), libqt6svg6 (>= 6.2.0), libqt6widgets6 (>= 6.3.0), libqt6xml6 (>= 6.1.2), libstdc++6 (>= 11), libuchardet0 (>= 0.0.1)")
+set(CPACK_DEBIAN_PACKAGE_CONFLICTS ${PACKAGE_NAME_QT5})
+else()
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON) # This is ok for Focal and all later Ubuntu releases
+set(CPACK_DEBIAN_PACKAGE_CONFLICTS ${PACKAGE_NAME_QT6})
+endif()
+
+set(CPACK_DEBIAN_DEBUGINFO_PACKAGE ON)
+
+endif()

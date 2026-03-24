@@ -14,6 +14,8 @@
 #include <QVariant>
 #include <QWheelEvent>
 
+#include <memory>
+
 class EditorTabWidget;
 
 namespace EditorNS

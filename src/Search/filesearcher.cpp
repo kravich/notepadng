@@ -3,6 +3,8 @@
 #include "Search/searchstring.h"
 #include "docengine.h"
 
+#include "Qt5Polyfill.h"
+
 #include <QDirIterator>
 
 #include <algorithm>

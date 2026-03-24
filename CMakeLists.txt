@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(notepadng)
+project(notepadng VERSION 0.0.99)
 
 #
 # Qt version configuration
@@ -137,6 +137,8 @@ set(notepadng_HEADERS
     src/include/stats.h
     src/include/Sessions/backupservice.h
     src/include/svgiconengine.h
+    src/include/Qt5Polyfill.h
+    src/config.h.in
 )
 
 set(notepadng_FORMS
@@ -164,12 +166,15 @@ add_executable(notepadng
 target_include_directories(notepadng
     PRIVATE
         src/include
+        ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 target_link_libraries(notepadng
     PRIVATE
         PkgConfig::uchardet
 )
+
+configure_file(src/config.h.in config.h @ONLY)
 
 set(QT_I18N_TRANSLATED_LANGUAGES
     de es fr hu it ja pl pt ru sl sv uk zh
@@ -262,12 +267,23 @@ install(DIRECTORY ${notepadng_DIST_PATH}/icons
 )
 
 install(FILES ${notepadng_DIST_PATH}/manpage/notepadng.1
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/man/man1
+    DESTINATION share/man/man1
 )
 
 install(FILES ${notepadng_DIST_PATH}/org.notepadng.Notepadng.appdata.xml
     DESTINATION share/metainfo
 )
+
+list(APPEND CPACK_GENERATOR DEB TGZ)
+list(APPEND CPACK_SOURCE_GENERATOR TGZ)
+
+# Propagate Qt version to CPack
+set(CPACK_WITH_QT ${WITH_QT})
+
+configure_file(CPackOptions.cmake.in CPackOptions.cmake @ONLY)
+set(CPACK_PROJECT_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/CPackOptions.cmake")
+
+include(CPack)
 
 include(CTest)
 

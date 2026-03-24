@@ -1,0 +1,6 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#cmakedefine CMAKE_PROJECT_VERSION "@CMAKE_PROJECT_VERSION@"
+
+#endif // CONFIG_H

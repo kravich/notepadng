@@ -6,6 +6,8 @@
 #include "include/notepadng.h"
 #include "include/nngsettings.h"
 
+#include "Qt5Polyfill.h"
+
 #include <QCoreApplication>
 #include <QFileInfo>
 #include <QMessageBox>
