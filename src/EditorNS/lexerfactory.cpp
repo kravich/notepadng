@@ -77,9 +77,9 @@ QsciLexer* CreateLexerForId(QObject *parent, const QString &id)
                         (id == "html")        ? new QsciLexerHTML(parent) :
                         (id == "idl")         ? new QsciLexerIDL(parent) :
                         (id == "java")        ? new QsciLexerJava(parent) :
-                        (id == "javascript")   ? new QsciLexerJavaScript(parent) :
+                        (id == "javascript")  ? new QsciLexerJavaScript(parent) :
                         (id == "json")        ? new QsciLexerJSON(parent) :
-                        (id == "latex")         ? new QsciLexerTeX(parent) :
+                        (id == "latex")       ? new QsciLexerTeX(parent) :
                         (id == "lua")         ? new QsciLexerLua(parent) :
                         (id == "makefile")    ? new QsciLexerMakefile(parent) :
                         (id == "markdown")    ? new QsciLexerMarkdown(parent) :
