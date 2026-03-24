@@ -18,6 +18,8 @@
 #include "include/nngrun.h"
 #include "ui_mainwindow.h"
 
+#include "Qt5Polyfill.h"
+
 #include <QActionGroup>
 #include <QClipboard>
 #include <QDateTime>

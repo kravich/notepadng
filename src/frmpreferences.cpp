@@ -8,6 +8,8 @@
 #include "include/stats.h"
 #include "ui_frmpreferences.h"
 
+#include "Qt5Polyfill.h"
+
 #include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QInputDialog>

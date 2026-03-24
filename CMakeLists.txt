@@ -137,6 +137,7 @@ set(notepadng_HEADERS
     src/include/stats.h
     src/include/Sessions/backupservice.h
     src/include/svgiconengine.h
+    src/include/Qt5Polyfill.h
 )
 
 set(notepadng_FORMS
