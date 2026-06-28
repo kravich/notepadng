@@ -24,6 +24,14 @@
       "asn1"
     ]
   },
+  "batch":{
+    "name":"Batch",
+    "mode":"batch",
+    "mime":"application/x-bat",
+    "fileExtensions":[
+      "bat"
+    ]
+  },
   "pgp":{
     "name":"PGP",
     "mode":"asciiarmor",

@@ -62,7 +62,7 @@ QsciLexer* CreateLexerForId(QObject *parent, const QString &id)
 {
     QsciLexer *lexer =  (id == "avs")         ? new QsciLexerAVS(parent) :          // FIXME: Add to Languages.json
                         (id == "bash")        ? new QsciLexerBash(parent) :
-                        (id == "batch")       ? new QsciLexerBatch(parent) :        // FIXME: Add to Languages.json
+                        (id == "batch")       ? new QsciLexerBatch(parent) :
                         (id == "cmake")       ? new QsciLexerCMake(parent) :
                         (id == "coffescript") ? new QsciLexerCoffeeScript(parent) :
                         (id == "c")           ? new QsciLexerCPP(parent) :    // Use C++ lexer for C
