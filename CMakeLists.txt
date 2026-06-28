@@ -243,7 +243,7 @@ target_compile_options(notepadng
         $<$<CXX_COMPILER_ID:Clang>:${CLANG_COMPILE_OPTIONS}>
 )
 
-set(notepadng_DIST_PATH dist)
+set(notepadng_DIST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/dist)
 
 file(GLOB_RECURSE notepadng_DIST ${notepadng_DIST_PATH}/*)
 add_custom_target(dist SOURCES ${notepadng_DIST})
@@ -272,6 +272,14 @@ install(FILES ${notepadng_DIST_PATH}/manpage/notepadng.1
 
 install(FILES ${notepadng_DIST_PATH}/org.notepadng.Notepadng.appdata.xml
     DESTINATION share/metainfo
+)
+
+# Debug symlinks to run binary from build directory
+set(notepadng_BUILD_RUNTIME_DIR ${CMAKE_CURRENT_BINARY_DIR}/share/notepadng)
+add_custom_command(TARGET notepadng POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${notepadng_BUILD_RUNTIME_DIR}
+    COMMAND ${CMAKE_COMMAND} -E create_symlink "${notepadng_DIST_PATH}/Languages.json" "${notepadng_BUILD_RUNTIME_DIR}/Languages.json"
+    COMMAND ${CMAKE_COMMAND} -E create_symlink "${notepadng_DIST_PATH}/themes" "${notepadng_BUILD_RUNTIME_DIR}/themes"
 )
 
 list(APPEND CPACK_GENERATOR DEB TGZ)

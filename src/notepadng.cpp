@@ -20,12 +20,14 @@ QString Notepadng::copyright()
 
 QString Notepadng::appDataPath(QString fileName)
 {
+    // Portable (or build-time) installation path
 #ifdef Q_OS_MACX
     QString def = QString("%1/../Resources/").arg(qApp->applicationDirPath());
 #else
-    QString def = QString("%1/../appdata/").arg(qApp->applicationDirPath());
+    QString def = QString("%1/share/%2/").arg(qApp->applicationDirPath()).arg(qApp->applicationName().toLower());
 #endif
 
+    // System installation path
     if (!QDir(def).exists())
         def = QString("%1/../share/%2/").arg(qApp->applicationDirPath()).arg(qApp->applicationName().toLower());
 
