@@ -908,6 +908,14 @@
       "psm1"
     ]
   },
+  "postscript":{
+    "name":"PostScript",
+    "mode":"postscript",
+    "mime":"application/postscript",
+    "fileExtensions":[
+      "ps"
+    ]
+  },
   "properties":{
     "name":"Properties files",
     "mode":"properties",

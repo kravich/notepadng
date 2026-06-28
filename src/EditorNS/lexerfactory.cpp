@@ -88,7 +88,7 @@ QsciLexer* CreateLexerForId(QObject *parent, const QString &id)
                         (id == "pascal")      ? new QsciLexerPascal(parent) :
                         (id == "perl")        ? new QsciLexerPerl(parent) :
                         (id == "po")          ? new QsciLexerPO(parent) :           // FIXME: Add to Languages.json
-                        (id == "postscript")  ? new QsciLexerPostScript(parent) :   // FIXME: Add to Languages.json
+                        (id == "postscript")  ? new QsciLexerPostScript(parent) :
                         (id == "pov")         ? new QsciLexerPOV(parent) :          // FIXME: Add to Languages.json
                         (id == "properties")  ? new QsciLexerProperties(parent) :
                         (id == "python")      ? new QsciLexerPython(parent) :
