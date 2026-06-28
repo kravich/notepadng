@@ -373,9 +373,9 @@ bool saveSession(DocEngine *docEngine, TopEditorContainer *editorContainer, QStr
 
         // Write all information to a session file
     QFile file(sessionPath);
-    file.open(QIODevice::WriteOnly);
+    bool isSessionPathOpen = file.open(QIODevice::WriteOnly);
 
-    if (!file.isOpen())
+    if (!isSessionPathOpen)
         return false;
 
     SessionWriter sessionWriter(file);
@@ -389,9 +389,9 @@ bool saveSession(DocEngine *docEngine, TopEditorContainer *editorContainer, QStr
 void loadSession(DocEngine *docEngine, TopEditorContainer *editorContainer, QString sessionPath)
 {
     QFile file(sessionPath);
-    file.open(QIODevice::ReadOnly);
+    bool isSessionPathOpen = file.open(QIODevice::ReadOnly);
 
-    if (!file.isOpen())
+    if (!isSessionPathOpen)
         return;
 
     SessionReader reader(file);

@@ -16,7 +16,15 @@ LanguageService::LanguageService()
     QFileInfo fileInfo(Notepadng::appDataPath());
     QString fileName = fileInfo.absolutePath() + "/Languages.json";
     QFile scriptFile(fileName);
-    scriptFile.open(QIODevice::ReadOnly | QIODevice::Text);
+    bool isScriptFileOpen = scriptFile.open(QIODevice::ReadOnly | QIODevice::Text);
+
+    // FIXME: Rework this error handling in a more graceful manner
+    if (!isScriptFileOpen)
+    {
+        fprintf(stderr, "Can't locate mandatory runtime files. Please check the consistency of your installation\n");
+        abort();
+    }
+
     QJsonDocument json = QJsonDocument::fromJson(scriptFile.readAll());
     scriptFile.close();
 
