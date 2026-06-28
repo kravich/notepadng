@@ -7,6 +7,11 @@ project(notepadng VERSION 0.0.99)
 #
 set(WITH_QT QT6 CACHE STRING "Qt version to use: either QT6 (default) or QT5")
 
+#
+# Build variant parametrization
+#
+set(BUILD_VARIANT "Native" CACHE STRING "Application build variant: Native, Snap, Flatpak, etc...")
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake/Modules")
 
 if(${WITH_QT} STREQUAL QT6)
@@ -242,6 +247,8 @@ target_compile_options(notepadng
         $<$<CXX_COMPILER_ID:GNU>:${GNU_COMPILE_OPTIONS}>
         $<$<CXX_COMPILER_ID:Clang>:${CLANG_COMPILE_OPTIONS}>
 )
+
+target_compile_definitions(notepadng PRIVATE BUILD_VARIANT="${BUILD_VARIANT}")
 
 set(notepadng_DIST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/dist)
 

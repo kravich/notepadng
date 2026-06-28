@@ -127,10 +127,8 @@ QList<QString> Notepadng::translations()
 void Notepadng::printEnvironmentInfo()
 {
     qDebug() << QString("Notepadng: %1").arg(POINTVERSION).toStdString().c_str();
-#ifdef BUILD_SNAP
-    qDebug() << "Snap build: yes";
-#else
-    qDebug() << "Snap build: no";
+#ifdef BUILD_VARIANT
+    qDebug() << "Build variant:" << BUILD_VARIANT;
 #endif
     qDebug() << QString("Qt: %1 - %2").arg(qVersion(), QSysInfo::buildAbi()).toStdString().c_str();
     qDebug() << QString("OS: %1 (%2 %3)")
