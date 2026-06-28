@@ -24,6 +24,14 @@
       "asn1"
     ]
   },
+  "batch":{
+    "name":"Batch",
+    "mode":"batch",
+    "mime":"application/x-bat",
+    "fileExtensions":[
+      "bat"
+    ]
+  },
   "pgp":{
     "name":"PGP",
     "mode":"asciiarmor",
@@ -898,6 +906,14 @@
       "ps1",
       "psd1",
       "psm1"
+    ]
+  },
+  "postscript":{
+    "name":"PostScript",
+    "mode":"postscript",
+    "mime":"application/postscript",
+    "fileExtensions":[
+      "ps"
     ]
   },
   "properties":{
