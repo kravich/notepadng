@@ -12,12 +12,32 @@ apps:
     command: usr/bin/notepadng
     desktop: usr/share/applications/org.notepadng.Notepadng.desktop
     extensions:
-      - kde-neon-6
+      - gnome
+    environment:
+      QT_PLUGIN_PATH: $SNAP/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/qt6/plugins
     plugs:
       - home
 
 parts:
+  qt6:
+    plugin: nil
+    stage-packages:
+      - libqt6core6
+      - libqt6svg6
+      - libqt6network6
+      - libqt6xml6
+      - libqt6core5compat6
+      - libqt6printsupport6
+      - qt6-wayland
+    prime:
+      - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libQt6*
+      - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/qt6/*
+      - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libb2.so.1*
+      - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libts.so.0*
+
   qscintilla:
+    after:
+      - qt6
     plugin: nil
     stage-packages:
       - libqscintilla2-qt6-15
@@ -41,6 +61,10 @@ parts:
       - dist/org.notepadng.Notepadng.appdata.xml
     build-packages:
       - pkgconf
+      - qt6-base-dev
+      - qt6-svg-dev
+      - qt6-tools-dev
+      - qt6-5compat-dev
       - libqscintilla2-qt6-dev
       - libuchardet-dev
     source: .
