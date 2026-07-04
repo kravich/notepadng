@@ -11,19 +11,11 @@ apps:
     common-id: org.notepadng.Notepadng
     command: usr/bin/notepadng
     desktop: usr/share/applications/org.notepadng.Notepadng.desktop
+    extensions:
+      - gnome
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy
       QT_PLUGIN_PATH: $SNAP/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}/qt6/plugins
     plugs:
-      - desktop
-      - desktop-legacy
-      - opengl
-      - wayland
-      - x11
-      - audio-playback
-      - unity7
-      - network
-      - network-bind
       - home
 
 parts:
@@ -37,7 +29,6 @@ parts:
       - libqt6core5compat6
       - libqt6printsupport6
       - qt6-wayland
-      - libproxy1v5
     prime:
       - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libQt6*
       - usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/qt6/*
