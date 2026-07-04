@@ -1,7 +1,7 @@
 name: notepadng
 adopt-info: notepadng
 
-grade: devel
+grade: stable
 confinement: strict
 icon: dist/icons/hicolor/scalable/apps/org.notepadng.Notepadng.svg
 base: core24

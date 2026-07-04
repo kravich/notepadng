@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(notepadng VERSION 0.0.99)
+project(notepadng VERSION 0.1.0)
 
 #
 # Qt version configuration
