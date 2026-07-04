@@ -35,6 +35,10 @@ if(${WITH_QT} STREQUAL QT6)
     qt_standard_project_setup()
 
     find_package(QScintillaQt6 REQUIRED)
+
+    # Support modern qt_add_translations() syntax for Qt versions less than 6.7
+    # FIXME: Enable it conditionally only for old Qt (how to tell Qt version from CMake?)
+    include(Qt6Polyfill)
 else()
     message(STATUS "Building Qt5 variant")
 
