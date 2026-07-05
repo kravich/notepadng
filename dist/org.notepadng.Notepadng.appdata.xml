@@ -16,10 +16,9 @@
       <image>https://notepadng.org/static/screenshots/screenshot-1.png</image>
     </screenshot>
   </screenshots>
-  <!-- FIXME: Select branding colors -->
   <branding>
-    <color type="primary" scheme_preference="light">#ffffff</color>
-    <color type="primary" scheme_preference="dark">#000000</color>
+    <color type="primary" scheme_preference="light">#262626</color>
+    <color type="primary" scheme_preference="dark">#595959</color>
   </branding>
   <requires>
     <control>keyboard</control>
