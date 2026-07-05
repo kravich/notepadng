@@ -30,6 +30,9 @@ modules:
   - name: uchardet
     buildsystem: cmake-ninja
     config-opts:
+      # uchardet declares compatibility with cmake 3.1, but newer runtime provides cmake 4.0+,
+      # which removed compatibility with eveything below cmake 3.5. Use compatibility option
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_BINARY=OFF
       - -DBUILD_STATIC=OFF
