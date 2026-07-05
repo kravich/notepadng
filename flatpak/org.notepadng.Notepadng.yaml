@@ -47,7 +47,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_VARIANT="Flatpak"
+      - -DBUILD_VARIANT=Flatpak
     cleanup:
       - "/share/man"
     sources:
