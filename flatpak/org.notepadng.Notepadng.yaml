@@ -8,15 +8,21 @@ finish-args:
   - --socket=fallback-x11
   - --socket=wayland
   - --device=dri
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
 
 modules:
   - name: libqscintilla
     buildsystem: qmake
     subdir: src
     cleanup:
-      - /include
       - /mkspecs
       - /qsci
+      - /lib/qt5
+      - /share/qt5/qsci
     sources:
       - type: archive
         url: https://www.riverbankcomputing.com/static/Downloads/QScintilla/2.14.1/QScintilla_src-2.14.1.tar.gz
@@ -33,11 +39,6 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_BINARY=OFF
       - -DBUILD_STATIC=OFF
-    cleanup:
-      - /include
-      - /lib/cmake
-      - /lib/pkgconfig
-      - /share/man
     sources:
       - type: archive
         url: https://www.freedesktop.org/software/uchardet/releases/uchardet-0.0.8.tar.xz
@@ -48,8 +49,6 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_VARIANT=Flatpak
-    cleanup:
-      - /share/man
     sources:
       - type: dir
         path: ..
