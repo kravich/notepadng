@@ -58,4 +58,6 @@ by following the above steps, then run:
 
 ## Distribution Packages
 
-> Not yet available. The plans are to provide native Ubuntu, Debian and Arch packages as well as Snap and Flatpack distributions
+1. Deb packages for Ubuntu Focal (Qt5) and Ubuntu Noble (Qt6) and newer are available on [Releases](https://github.com/kravich/notepadng/releases) page
+2. Flatpak build is available on [Flathub](https://flathub.org/ru/apps/org.notepadng.Notepadng)
+3. Snap build is available on [Snap Store](https://snapcraft.io/notepadng)
